@@ -51,7 +51,28 @@ elseif($_POST['action']=='login'){
    }
 }
 elseif($_POST['action']=='alert'){
-	
+$type=$_POST['type'];
+	$result=mysqli_query($connection,"SELECT `password`,`name` FROM `app`.`users` WHERE `mobile`='{$_POST['mobile']}'");
+    $row_cnt = mysqli_num_rows($result);
+     if($row_cnt>0)
+   {
+     $user=mysqli_fetch_assoc($result);
+   }
+	if($type=="road-accident"){
+    $amb=1;
+    $pol=1;
+    $data = array( $user,$amb,$pol,$fb);
+	}
+	elseif($type=="earthquake"){
+    $amb=1;
+    $data = array( $user,$amb,$pol,$fb);
+	}
+	elseif($type=="fire"){
+    $amb=1;
+    $pol=1;
+	$fb=1;
+	$data = array( $user,$amb,$pol,$fb);
+	}	
 }
 	}
 	else
@@ -62,5 +83,5 @@ elseif($_POST['action']=='alert'){
 {
 	
 }
-
+echo json_encode( $data);
 ?>
