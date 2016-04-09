@@ -73,6 +73,9 @@ $type=$_POST['type'];
 	$fb=1;
 	$data = array( $user,$amb,$pol,$fb);
 	}	
+	
+	$sql1="INSERT INTO `app`.`alert`(`name`,`mobile`,`type`)VALUES('{$_POST['name']}','{$_POST['mobile']}','$type')";
+		mysqli_query($connection,$sql1);
 }
 	}
 	else
